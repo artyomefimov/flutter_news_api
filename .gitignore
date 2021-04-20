@@ -1,5 +1,5 @@
 # Miscellaneous
-*.env
+config.json
 *.class
 *.log
 *.pyc

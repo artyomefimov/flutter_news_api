@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_news_api/data/api/interceptor/auth_interceptor.dart';
 import 'package:flutter_news_api/data/api/news_api.dart';
+import 'package:flutter_news_api/data/api/token/token_holder.dart';
 import 'package:flutter_news_api/data/mapper/news_mapper.dart';
 import 'package:flutter_news_api/data/model/news_response.dart';
 import 'package:flutter_news_api/data/repo/news_repository_impl.dart';
@@ -20,6 +21,10 @@ class DiModule {
   }
 
   void _dataModule() {
+    _injector.map<TokenHolder>(
+      (injector) => TokenHolder(),
+      isSingleton: true,
+    );
     _injector.map<Dio>(
       (injector) => Dio()
         ..interceptors.add(
@@ -34,7 +39,9 @@ class DiModule {
           ),
         )
         ..interceptors.add(
-          AuthInterceptor(),
+          AuthInterceptor(
+            injector.get<TokenHolder>(),
+          ),
         ),
       isSingleton: true,
     );
@@ -44,20 +51,20 @@ class DiModule {
     );
     _injector.map(
       (injector) => NewsApi(
-        _injector.get<Dio>(),
+        injector.get<Dio>(),
       ),
       isSingleton: true,
     );
     _injector.map<NewsRepository>(
       (injector) => NewsRepositoryImpl(
-        api: _injector.get<NewsApi>(),
-        articlesMapper: _injector.get<Mapper<NewsResponse, News>>(),
+        api: injector.get<NewsApi>(),
+        articlesMapper: injector.get<Mapper<NewsResponse, News>>(),
       ),
       isSingleton: true,
     );
     _injector.map<NewsInteractor>(
       (injector) => NewsInteractorImpl(
-        _injector.get<NewsRepository>(),
+        injector.get<NewsRepository>(),
       ),
       isSingleton: true,
     );
