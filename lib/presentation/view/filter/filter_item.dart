@@ -43,14 +43,14 @@ class CategoryFilterItem extends StatelessWidget {
   }
 }
 
-
 Widget filterItem(String text) => Material(
+      elevation: Dimensions.elevation,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(Dimensions.filterItemRadius),
         ),
       ),
-      color: Colors.lightBlue,
+      color: Colors.indigoAccent,
       child: Padding(
         padding: EdgeInsets.symmetric(
           vertical: Dimensions.marginEight,
@@ -60,7 +60,7 @@ Widget filterItem(String text) => Material(
           text,
           style: TextStyle(
             fontSize: Dimensions.articleDescriptionTextSize,
-            color: Colors.black87,
+            color: Colors.white,
           ),
         ),
       ),

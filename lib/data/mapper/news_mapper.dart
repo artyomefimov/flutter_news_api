@@ -6,7 +6,7 @@ import 'package:flutter_news_api/domain/model/news.dart';
 import 'package:intl/intl.dart';
 
 class NewsMapper implements Mapper<NewsResponse, News> {
-  final _dateFormat = DateFormat('yyyy-MM-dd hh:mm');
+  final _dateFormat = DateFormat('dd MMMM yyyy hh:mm');
 
   @override
   News map(NewsResponse from) => News(

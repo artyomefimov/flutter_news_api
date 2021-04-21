@@ -35,7 +35,6 @@ class _FilterItemsState extends State<FilterItems> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey,
       padding: const EdgeInsets.only(
         top: Dimensions.marginEight,
         bottom: Dimensions.marginEight,
