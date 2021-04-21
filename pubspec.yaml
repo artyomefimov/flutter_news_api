@@ -36,6 +36,7 @@ dependencies:
   intl: ^0.17.0
   mwwm: ^1.0.2
   relation: ^1.0.0
+  dart_extensions: ^2.0.1
 
 dev_dependencies:
   flutter_test:
