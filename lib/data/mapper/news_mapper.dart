@@ -24,7 +24,7 @@ class NewsMapper implements Mapper<NewsResponse, News> {
           description: item.description,
           url: item.url,
           urlToImage: item.urlToImage,
-          publishDate: _dateFormat.parse(item.publishedAt).toString(),
+          publishDate: _dateFormat.format(DateTime.parse(item.publishedAt)),
           content: item.content,
         );
       });
