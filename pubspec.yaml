@@ -34,7 +34,8 @@ dependencies:
   pretty_dio_logger: ^1.1.1
   json_annotation: ^4.0.1
   intl: ^0.17.0
-
+  mwwm: ^1.0.2
+  relation: ^1.0.0
 
 dev_dependencies:
   flutter_test:

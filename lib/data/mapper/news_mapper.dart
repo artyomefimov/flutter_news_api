@@ -17,15 +17,18 @@ class NewsMapper implements Mapper<NewsResponse, News> {
   List<Article> _toArticle(List<ArticleDto> dtoArticles) =>
       List.generate(dtoArticles.length, (index) {
         final item = dtoArticles[index];
+        final publishDate = item.publishedAt != null
+            ? _dateFormat.format(DateTime.parse(item.publishedAt!))
+            : "";
         return Article(
-          sourceName: item.source.name,
-          author: item.author,
-          title: item.title,
-          description: item.description,
-          url: item.url,
-          urlToImage: item.urlToImage,
-          publishDate: _dateFormat.format(DateTime.parse(item.publishedAt)),
-          content: item.content,
+          sourceName: item.source?.name ?? "",
+          author: item.author ?? "",
+          title: item.title ?? "",
+          description: item.description ?? "",
+          url: item.url ?? "",
+          urlToImage: item.urlToImage ?? "",
+          publishDate: publishDate,
+          content: item.content ?? "",
         );
       });
 }

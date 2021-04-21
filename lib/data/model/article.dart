@@ -6,14 +6,14 @@ part 'article.g.dart';
 
 @JsonSerializable()
 class ArticleDto {
-  late final Source source;
-  late final String author;
-  late final String title;
-  late final String description;
-  late final String url;
-  late final String urlToImage;
-  late final String publishedAt;
-  late final String content;
+  late final Source? source;
+  late final String? author;
+  late final String? title;
+  late final String? description;
+  late final String? url;
+  late final String? urlToImage;
+  late final String? publishedAt;
+  late final String? content;
 
   ArticleDto({
     required this.source,
