@@ -4,6 +4,7 @@ abstract class Strings {
   static const everything = "Everything";
   static const chooseCategory = "Choose category";
   static const chooseCountry = "Choose country";
+  static const checkInSource = "Check in source";
 }
 
 abstract class Dimensions {
@@ -13,6 +14,7 @@ abstract class Dimensions {
   static const marginTen = 10.0;
   static const marginNormal = 16.0;
   static const articleTitleTextSize = 18.0;
+  static const articleMainTextSize = 16.0;
   static const articleDescriptionTextSize = 14.0;
   static const articleInfoTextSize = 12.0;
   static const progressBarStrokeWidth = 4.0;

@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_api/presentation/constants.dart';
 import 'package:flutter_news_api/presentation/view/everything/AllNewsScreen.dart';
@@ -26,9 +27,17 @@ class _MainScreenState extends State<MainScreen> {
         title: Text(Strings.newsApp),
         centerTitle: true,
       ),
-      body: _items.entries
-          .firstWhere((entry) => entry.key == _currentIndex)
-          .value,
+      body: PageTransitionSwitcher(
+        transitionBuilder: (child, primaryAnim, secondaryAnim) =>
+            FadeThroughTransition(
+          child: child,
+          animation: primaryAnim,
+          secondaryAnimation: secondaryAnim,
+        ),
+        child: _items.entries
+            .firstWhere((entry) => entry.key == _currentIndex)
+            .value,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {

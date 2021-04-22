@@ -38,6 +38,8 @@ dependencies:
   relation: ^1.0.0
   dart_extensions: ^2.0.1
   scroll_shadow_container: ^1.0.1
+  url_launcher: ^6.0.3
+  animations: ^2.0.0
 
 dev_dependencies:
   flutter_test:

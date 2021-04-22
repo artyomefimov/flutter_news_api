@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_api/presentation/constants.dart';
 import 'package:flutter_news_api/presentation/view/filter/filter_alert_dialog.dart';
@@ -13,8 +14,13 @@ class CountryFilterItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        showDialog(
+        showModal(
           context: context,
+          configuration: FadeScaleTransitionConfiguration(
+            transitionDuration: Duration(
+              milliseconds: 300,
+            ),
+          ),
           builder: (context) => CountryAlertDialog(),
         ).then((value) => onClicked(value));
       },
@@ -33,8 +39,13 @@ class CategoryFilterItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        showDialog(
+        showModal(
           context: context,
+          configuration: FadeScaleTransitionConfiguration(
+            transitionDuration: Duration(
+              milliseconds: 300,
+            ),
+          ),
           builder: (context) => CategoryAlertDialog(),
         ).then((value) => onClicked(value));
       },
