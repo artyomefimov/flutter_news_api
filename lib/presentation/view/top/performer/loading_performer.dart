@@ -11,5 +11,5 @@ class LoadingPerformer extends FuturePerformer<ResultWrapper<News>, LoadingChang
 
   @override
   Future<ResultWrapper<News>> perform(LoadingChange change) =>
-      interactor.getTopArticles(change.country, change.category);
+      interactor.getTopArticles(change.filter);
 }

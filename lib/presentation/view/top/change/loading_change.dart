@@ -1,10 +1,10 @@
+import 'package:flutter_news_api/domain/model/filter/top/top_filter.dart';
 import 'package:flutter_news_api/domain/model/news/news.dart';
 import 'package:flutter_news_api/domain/model/result_wrapper.dart';
 import 'package:mwwm/mwwm.dart';
 
 class LoadingChange extends FutureChange<ResultWrapper<News>> {
-  final String? country;
-  final String? category;
+  final TopFilter filter;
 
-  LoadingChange({this.country, this.category});
+  LoadingChange({required this.filter});
 }

@@ -6,9 +6,4 @@ class TopFilter {
   late final Category category;
 
   TopFilter({required this.country, required this.category});
-
-  factory TopFilter.byDefault() => TopFilter(
-        country: Country.USA,
-        category: Category.BUSINESS,
-      );
 }

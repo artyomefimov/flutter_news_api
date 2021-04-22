@@ -40,6 +40,7 @@ dependencies:
   scroll_shadow_container: ^1.0.1
   url_launcher: ^6.0.3
   animations: ^2.0.0
+  shared_preferences: ^2.0.5
 
 dev_dependencies:
   flutter_test:

@@ -5,6 +5,8 @@ import 'package:flutter_news_api/data/api/token/token_holder.dart';
 import 'package:flutter_news_api/data/mapper/news_mapper.dart';
 import 'package:flutter_news_api/data/model/news_response.dart';
 import 'package:flutter_news_api/data/repo/news_repository_impl.dart';
+import 'package:flutter_news_api/domain/interactor/filter/top/top_filter_interactor.dart';
+import 'package:flutter_news_api/domain/interactor/filter/top/top_filter_interactor_impl.dart';
 import 'package:flutter_news_api/domain/interactor/news_interactor.dart';
 import 'package:flutter_news_api/domain/interactor/news_interactor_impl.dart';
 import 'package:flutter_news_api/domain/mapper/mapper.dart';
@@ -66,6 +68,10 @@ class DiModule {
       (injector) => NewsInteractorImpl(
         injector.get<NewsRepository>(),
       ),
+      isSingleton: true,
+    );
+    _injector.map<TopFilterInteractor>(
+          (injector) => TopFilterInteractorImpl(),
       isSingleton: true,
     );
   }

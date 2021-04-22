@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news_api/domain/model/filter/top/category.dart';
-import 'package:flutter_news_api/domain/model/filter/top/country.dart';
-import 'package:flutter_news_api/domain/model/filter/top/top_filter.dart';
 import 'package:flutter_news_api/domain/model/news/news.dart';
 import 'package:flutter_news_api/presentation/constants.dart';
 import 'package:flutter_news_api/presentation/view/item/article_item.dart';
-import 'package:flutter_news_api/presentation/view/top/screen/top_filter_items.dart';
+import 'package:flutter_news_api/presentation/view/top/route/top_highlights_route.dart';
 import 'package:flutter_news_api/presentation/view/top/wm/top_highlights_widget_model.dart';
 import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart' as r;
@@ -21,20 +18,11 @@ class TopHighlightsScreen extends CoreMwwmWidget {
 }
 
 class _TopHighlightsScreenState extends WidgetState<TopHighlightsWidgetModel> {
-  late final TopFilterChangedCallback onFilterChanged;
-
-  @override
-  void initState() {
-    super.initState();
-    onFilterChanged = (filter) => _onFilterChanged(filter);
-    wm.loadNews(Country.USA.code, Category.SPORTS.value);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TopFilterItems(onFilterChanged: onFilterChanged),
+        topFilterItems(context),
         Expanded(
           child: ScrollShadowContainer(
             elevation: MaterialElevation.the4dp,
@@ -77,8 +65,4 @@ class _TopHighlightsScreenState extends WidgetState<TopHighlightsWidgetModel> {
       );
 
   Widget _errorChild() => Text(Strings.topHighlights);
-
-  void _onFilterChanged(TopFilter filter) {
-    wm.loadNews(filter.country.code, filter.category.value);
-  }
 }
