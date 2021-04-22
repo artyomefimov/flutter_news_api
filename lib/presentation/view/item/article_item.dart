@@ -1,6 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_news_api/domain/model/article.dart';
+import 'package:flutter_news_api/domain/model/news/article.dart';
 import 'package:flutter_news_api/presentation/constants.dart';
 import 'package:flutter_news_api/presentation/view/details/article_details_screen.dart';
 import 'package:flutter_news_api/presentation/view/image/image_loading_indicator.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news_api/domain/model/article.dart';
+import 'package:flutter_news_api/domain/model/news/article.dart';
 import 'package:flutter_news_api/presentation/constants.dart';
 import 'package:flutter_news_api/presentation/view/image/image_loading_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';

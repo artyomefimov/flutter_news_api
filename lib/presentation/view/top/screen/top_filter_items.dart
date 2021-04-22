@@ -1,27 +1,26 @@
-import 'package:dart_extensions/dart_extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_news_api/domain/model/category.dart';
-import 'package:flutter_news_api/domain/model/country.dart';
+import 'package:flutter_news_api/domain/model/filter/top/category.dart';
+import 'package:flutter_news_api/domain/model/filter/top/top_filter.dart';
+import 'package:flutter_news_api/domain/model/filter/top/country.dart';
 import 'package:flutter_news_api/presentation/constants.dart';
-import 'package:flutter_news_api/presentation/model/current_filter.dart';
 import 'package:flutter_news_api/presentation/view/filter/filter_item.dart';
+import 'package:dart_extensions/dart_extensions.dart';
 
-typedef FilterClickedCallback = void Function(String);
-typedef FilterChangedCallback = void Function(CurrentFilter);
+typedef TopFilterChangedCallback = void Function(TopFilter);
 
-class FilterItems extends StatefulWidget {
-  final FilterChangedCallback onFilterChanged;
+class TopFilterItems extends StatefulWidget {
+  final TopFilterChangedCallback onFilterChanged;
 
-  FilterItems({Key? key, required this.onFilterChanged}) : super(key: key);
+  TopFilterItems({Key? key, required this.onFilterChanged}) : super(key: key);
 
   @override
-  _FilterItemsState createState() => _FilterItemsState();
+  _TopFilterItemsState createState() => _TopFilterItemsState();
 }
 
-class _FilterItemsState extends State<FilterItems> {
+class _TopFilterItemsState extends State<TopFilterItems> {
   final countries = allCountries();
   final categories = allCategories();
-  CurrentFilter currentFilter = CurrentFilter.byDefault();
+  TopFilter currentFilter = TopFilter.byDefault();
   late final onCountryClicked;
   late final onCategoryClicked;
 
@@ -42,12 +41,16 @@ class _FilterItemsState extends State<FilterItems> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          CountryFilterItem(
+          FilterItem(
             text: currentFilter.country.name,
+            dialogTitle: Strings.chooseCountry,
+            dialogContent: allCountryNames(),
             onClicked: onCountryClicked,
           ),
-          CategoryFilterItem(
+          FilterItem(
             text: currentFilter.category.value,
+            dialogTitle: Strings.chooseCategory,
+            dialogContent: allCategoryValues(),
             onClicked: onCategoryClicked,
           ),
         ],
@@ -60,7 +63,7 @@ class _FilterItemsState extends State<FilterItems> {
         countries.find((e) => e.name == countryName) ?? Country.USA;
     setState(() {
       currentFilter =
-          CurrentFilter(country: newCountry, category: currentFilter.category);
+          TopFilter(country: newCountry, category: currentFilter.category);
       widget.onFilterChanged(currentFilter);
     });
   }
@@ -70,7 +73,7 @@ class _FilterItemsState extends State<FilterItems> {
         categories.find((e) => e.value == category) ?? Category.SPORTS;
     setState(() {
       currentFilter =
-          CurrentFilter(country: currentFilter.country, category: newCategory);
+          TopFilter(country: currentFilter.country, category: newCategory);
       widget.onFilterChanged(currentFilter);
     });
   }

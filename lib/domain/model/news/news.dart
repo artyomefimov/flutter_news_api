@@ -1,4 +1,4 @@
-import 'package:flutter_news_api/domain/model/article.dart';
+import 'package:flutter_news_api/domain/model/news/article.dart';
 
 class News {
   late final int totalResults;

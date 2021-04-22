@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news_api/domain/model/category.dart';
-import 'package:flutter_news_api/domain/model/country.dart';
-import 'package:flutter_news_api/domain/model/news.dart';
+import 'package:flutter_news_api/domain/model/filter/top/category.dart';
+import 'package:flutter_news_api/domain/model/filter/top/country.dart';
+import 'package:flutter_news_api/domain/model/filter/top/top_filter.dart';
+import 'package:flutter_news_api/domain/model/news/news.dart';
 import 'package:flutter_news_api/presentation/constants.dart';
-import 'package:flutter_news_api/presentation/model/current_filter.dart';
-import 'package:flutter_news_api/presentation/view/filter/filter_items.dart';
 import 'package:flutter_news_api/presentation/view/item/article_item.dart';
+import 'package:flutter_news_api/presentation/view/top/screen/top_filter_items.dart';
 import 'package:flutter_news_api/presentation/view/top/wm/top_highlights_widget_model.dart';
 import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart' as r;
@@ -21,7 +21,7 @@ class TopHighlightsScreen extends CoreMwwmWidget {
 }
 
 class _TopHighlightsScreenState extends WidgetState<TopHighlightsWidgetModel> {
-  late final FilterChangedCallback onFilterChanged;
+  late final TopFilterChangedCallback onFilterChanged;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _TopHighlightsScreenState extends WidgetState<TopHighlightsWidgetModel> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        FilterItems(onFilterChanged: onFilterChanged),
+        TopFilterItems(onFilterChanged: onFilterChanged),
         Expanded(
           child: ScrollShadowContainer(
             elevation: MaterialElevation.the4dp,
@@ -78,7 +78,7 @@ class _TopHighlightsScreenState extends WidgetState<TopHighlightsWidgetModel> {
 
   Widget _errorChild() => Text(Strings.topHighlights);
 
-  void _onFilterChanged(CurrentFilter filter) {
+  void _onFilterChanged(TopFilter filter) {
     wm.loadNews(filter.country.code, filter.category.value);
   }
 }

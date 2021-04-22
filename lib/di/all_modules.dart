@@ -8,7 +8,7 @@ import 'package:flutter_news_api/data/repo/news_repository_impl.dart';
 import 'package:flutter_news_api/domain/interactor/news_interactor.dart';
 import 'package:flutter_news_api/domain/interactor/news_interactor_impl.dart';
 import 'package:flutter_news_api/domain/mapper/mapper.dart';
-import 'package:flutter_news_api/domain/model/news.dart';
+import 'package:flutter_news_api/domain/model/news/news.dart';
 import 'package:flutter_news_api/domain/repo/news_repository.dart';
 import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';

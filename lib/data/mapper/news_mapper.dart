@@ -1,8 +1,8 @@
 import 'package:flutter_news_api/data/model/article.dart';
 import 'package:flutter_news_api/data/model/news_response.dart';
 import 'package:flutter_news_api/domain/mapper/mapper.dart';
-import 'package:flutter_news_api/domain/model/article.dart';
-import 'package:flutter_news_api/domain/model/news.dart';
+import 'package:flutter_news_api/domain/model/news/article.dart';
+import 'package:flutter_news_api/domain/model/news/news.dart';
 import 'package:intl/intl.dart';
 
 class NewsMapper implements Mapper<NewsResponse, News> {
