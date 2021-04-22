@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news_api/domain/model/article.dart';
 import 'package:flutter_news_api/presentation/constants.dart';
 import 'package:flutter_news_api/presentation/view/details/article_details_screen.dart';
+import 'package:flutter_news_api/presentation/view/image/image_loading_indicator.dart';
 
 class ArticleItem extends StatelessWidget {
   late final Article article;
@@ -12,7 +13,7 @@ class ArticleItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      elevation: Dimensions.elevation,
+      elevation: Dimensions.defaultElevation,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(Dimensions.itemRadius),
@@ -30,6 +31,7 @@ class ArticleItem extends StatelessWidget {
   Widget _item() => Container(
         padding: EdgeInsets.all(Dimensions.marginNormal),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _title(),
             _marginDefault(),
@@ -62,7 +64,7 @@ class ArticleItem extends StatelessWidget {
         height: Dimensions.marginNormal,
       );
 
-  Widget _image() => Image.network(article.urlToImage);
+  Widget _image() => networkImage(article.urlToImage);
 
   Widget _sourceNameAndPublishDate() => Row(
         mainAxisAlignment: MainAxisAlignment.start,

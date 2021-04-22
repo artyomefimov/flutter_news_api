@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_api/domain/model/article.dart';
 import 'package:flutter_news_api/presentation/constants.dart';
+import 'package:flutter_news_api/presentation/view/image/image_loading_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ArticleDetailsScreen extends StatefulWidget {
@@ -28,7 +29,7 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
       Container(
         padding: EdgeInsets.all(Dimensions.marginNormal),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _authorAndSource(),
             _marginDefault(),
@@ -94,7 +95,7 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
     },
   );
 
-  Widget _articleImage() => Image.network(widget.article.urlToImage);
+  Widget _articleImage() => networkImage(widget.article.urlToImage);
 
   Widget _content() => Text(
     widget.article.description,

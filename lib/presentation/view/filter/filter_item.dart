@@ -55,7 +55,7 @@ class CategoryFilterItem extends StatelessWidget {
 }
 
 Widget filterItem(String text) => Material(
-      elevation: Dimensions.elevation,
+      elevation: Dimensions.defaultElevation,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(Dimensions.filterItemRadius),
