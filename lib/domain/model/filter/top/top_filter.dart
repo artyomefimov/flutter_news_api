@@ -5,5 +5,8 @@ class TopFilter {
   late final Country country;
   late final Category category;
 
-  TopFilter({required this.country, required this.category});
+  TopFilter({
+    required this.country,
+    required this.category,
+  });
 }

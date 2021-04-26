@@ -1,7 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_api/presentation/constants.dart';
-import 'package:flutter_news_api/presentation/view/everything/AllNewsScreen.dart';
+import 'file:///C:/FlutterApps/flutter_news_api/flutter_news_api/lib/presentation/view/everything/screen/AllNewsScreen.dart';
 import 'package:flutter_news_api/presentation/view/top/route/top_highlights_route.dart';
 
 class MainScreen extends StatefulWidget {

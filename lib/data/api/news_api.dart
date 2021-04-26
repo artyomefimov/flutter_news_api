@@ -16,4 +16,12 @@ abstract class NewsApi {
     @Query("country") String? country,
     @Query("category") String? category,
   );
+
+  @GET("/everything")
+  Future<NewsResponse> getAllArticles(
+    @Query("language") String? language,
+    @Query("sortBy") String? sortBy,
+    @Query("pageSize") int pageSize,
+    @Query("page") int page,
+  );
 }

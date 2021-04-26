@@ -6,4 +6,11 @@ abstract class NewsRepository {
     String? country,
     String? category,
   );
+
+  Future<ResultWrapper<News>> getAllArticles(
+    String language,
+    String sortBy,
+    int pageSize,
+    int page,
+  );
 }

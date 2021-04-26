@@ -25,7 +25,31 @@ class NewsRepositoryImpl implements NewsRepository {
     String? category,
   ) async {
     try {
-      final response = await _api.getTopArticles(country, category);
+      final response = await _api.getTopArticles(
+        country,
+        category,
+      );
+      return ResultWrapper.success(_articlesMapper.map(response));
+    } catch (error, stacktrace) {
+      log("Exception occurred: $error stackTrace: $stacktrace");
+      return ResultWrapper.error(error.toString());
+    }
+  }
+
+  @override
+  Future<ResultWrapper<News>> getAllArticles(
+    String language,
+    String sortBy,
+    int pageSize,
+    int page,
+  ) async {
+    try {
+      final response = await _api.getAllArticles(
+        language,
+        sortBy,
+        pageSize,
+        page,
+      );
       return ResultWrapper.success(_articlesMapper.map(response));
     } catch (error, stacktrace) {
       log("Exception occurred: $error stackTrace: $stacktrace");

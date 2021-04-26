@@ -1,10 +1,11 @@
 import 'dart:async';
+
+import 'package:dart_extensions/dart_extensions.dart';
 import 'package:flutter_news_api/domain/interactor/filter/top/top_filter_interactor.dart';
 import 'package:flutter_news_api/domain/model/filter/top/category.dart';
 import 'package:flutter_news_api/domain/model/filter/top/country.dart';
 import 'package:flutter_news_api/domain/model/filter/top/top_filter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:dart_extensions/dart_extensions.dart';
 
 class TopFilterInteractorImpl implements TopFilterInteractor {
   static const _countryNameKey = "country_name";
@@ -27,10 +28,9 @@ class TopFilterInteractorImpl implements TopFilterInteractor {
     );
 
     _currentFilter = TopFilter(
-      country: _countries.find((e) => e.name == countryName) ??
-          Country.USA,
-      category: _categories.find((e) => e.value == categoryValue) ??
-          Category.GENERAL,
+      country: _countries.find((e) => e.name == countryName) ?? Country.USA,
+      category:
+          _categories.find((e) => e.value == categoryValue) ?? Category.GENERAL,
     );
     _topFilterStream.add(_currentFilter!);
   }
@@ -40,8 +40,7 @@ class TopFilterInteractorImpl implements TopFilterInteractor {
     final prefs = await _getPreferences();
     prefs.setString(_countryNameKey, countryName);
     _currentFilter = TopFilter(
-      country: _countries.find((e) => e.name == countryName) ??
-          Country.USA,
+      country: _countries.find((e) => e.name == countryName) ?? Country.USA,
       category: _currentFilter!.category,
     );
     _topFilterStream.add(_currentFilter!);
@@ -53,18 +52,20 @@ class TopFilterInteractorImpl implements TopFilterInteractor {
     prefs.setString(_categoryValueKey, categoryValue);
     _currentFilter = TopFilter(
       country: _currentFilter!.country,
-      category: _categories.find((e) => e.value == categoryValue) ??
-          Category.GENERAL,
+      category:
+          _categories.find((e) => e.value == categoryValue) ?? Category.GENERAL,
     );
     _topFilterStream.add(_currentFilter!);
   }
 
-
   @override
-  Stream<TopFilter> getTopFilterBroadcast() => _topFilterStream.stream.asBroadcastStream();
+  Stream<TopFilter> getTopFilterBroadcast() =>
+      _topFilterStream.stream.asBroadcastStream();
 
-  Future<String> _getInitialValue(
-      {required String key, required String defaultValue,}) async {
+  Future<String> _getInitialValue({
+    required String key,
+    required String defaultValue,
+  }) async {
     final prefs = await _getPreferences();
     if (!prefs.containsKey(key)) {
       await prefs.setString(key, defaultValue);
