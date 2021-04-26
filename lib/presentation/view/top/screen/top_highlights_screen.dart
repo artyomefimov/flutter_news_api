@@ -3,10 +3,12 @@ import 'package:flutter_news_api/domain/model/news/news.dart';
 import 'package:flutter_news_api/presentation/constants.dart';
 import 'package:flutter_news_api/presentation/view/error/error_widget.dart';
 import 'package:flutter_news_api/presentation/view/item/article_item.dart';
+import 'package:flutter_news_api/presentation/view/loading/loading.dart';
 import 'package:flutter_news_api/presentation/view/top/route/top_highlights_route.dart';
 import 'package:flutter_news_api/presentation/view/top/wm/top_highlights_widget_model.dart';
 import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart' as r;
+
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:scroll_shadow_container/scroll_shadow_container.dart';
 
@@ -21,30 +23,23 @@ class TopHighlightsScreen extends CoreMwwmWidget {
 
 class _TopHighlightsScreenState extends WidgetState<TopHighlightsWidgetModel> {
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        topFilterItems(context),
-        Expanded(
-          child: ScrollShadowContainer(
-            elevation: MaterialElevation.the4dp,
-            child: r.EntityStateBuilder<News>(
-              streamedState: wm.loadNewsState,
-              child: (context, data) => _contentChild(data as News),
-              loadingChild: _loadingChild(),
-              errorChild: _errorChild(),
+  Widget build(BuildContext context) => Column(
+        children: [
+          topFilterItems(context),
+          Expanded(
+            child: ScrollShadowContainer(
+              elevation: MaterialElevation.the4dp,
+              child: r.EntityStateBuilder<News>(
+                streamedState: wm.loadNewsState,
+                child: (context, data) => _contentChild(data as News),
+                loadingChild: loadingIndicator(),
+                errorChild: ErrorItem(
+                  onRetryClicked: () => wm.loadNews(),
+                ),
+              ),
             ),
           ),
-        ),
-      ],
-    );
-  }
-
-  Widget _loadingChild() => Center(
-        child: CircularProgressIndicator(
-          valueColor: new AlwaysStoppedAnimation<Color>(Colors.indigo),
-          strokeWidth: Dimensions.progressBarStrokeWidth,
-        ),
+        ],
       );
 
   Widget _contentChild(News news) => ListView.builder(
@@ -64,9 +59,5 @@ class _TopHighlightsScreenState extends WidgetState<TopHighlightsWidgetModel> {
             child: ArticleItem(news.articles[index]),
           );
         },
-      );
-
-  Widget _errorChild() => ErrorItem(
-        onRetryClicked: () => wm.loadNews(),
       );
 }

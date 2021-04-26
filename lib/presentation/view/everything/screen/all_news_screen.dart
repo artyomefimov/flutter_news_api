@@ -5,6 +5,7 @@ import 'package:flutter_news_api/presentation/view/error/error_widget.dart';
 import 'package:flutter_news_api/presentation/view/everything/route/all_news_route.dart';
 import 'package:flutter_news_api/presentation/view/everything/wm/all_news_widget_model.dart';
 import 'package:flutter_news_api/presentation/view/item/article_item.dart';
+import 'package:flutter_news_api/presentation/view/loading/loading.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:mwwm/mwwm.dart';
 
@@ -40,7 +41,8 @@ class _AllNewsScreenState extends WidgetState<AllNewsWidgetModel> {
                           ),
                           child: ArticleItem(item),
                         ),
-                    firstPageProgressIndicatorBuilder: (_) => _loadingChild(),
+                    firstPageProgressIndicatorBuilder: (_) =>
+                        loadingIndicator(),
                     firstPageErrorIndicatorBuilder: (_) => ErrorItem(
                           onRetryClicked: () => wm.loadNews(),
                         )),
@@ -48,12 +50,5 @@ class _AllNewsScreenState extends WidgetState<AllNewsWidgetModel> {
             ),
           ),
         ],
-      );
-
-  Widget _loadingChild() => Center(
-        child: CircularProgressIndicator(
-          valueColor: new AlwaysStoppedAnimation<Color>(Colors.indigo),
-          strokeWidth: Dimensions.progressBarStrokeWidth,
-        ),
       );
 }
