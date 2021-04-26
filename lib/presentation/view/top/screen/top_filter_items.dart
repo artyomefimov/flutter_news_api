@@ -37,7 +37,7 @@ class _TopFilterItemsState extends WidgetState<TopFilterWidgetModel> {
         bottom: Dimensions.marginEight,
       ),
       child: StreamedStateBuilder<TopFilter>(
-        streamedState: wm.filter,
+        streamedState: wm.topFilterState,
         builder: (context, data) {
           if (data == null) {
             return Container();

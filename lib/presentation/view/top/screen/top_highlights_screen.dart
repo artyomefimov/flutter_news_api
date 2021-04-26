@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_api/domain/model/news/news.dart';
 import 'package:flutter_news_api/presentation/constants.dart';
+import 'package:flutter_news_api/presentation/view/error/error_widget.dart';
 import 'package:flutter_news_api/presentation/view/item/article_item.dart';
 import 'package:flutter_news_api/presentation/view/top/route/top_highlights_route.dart';
 import 'package:flutter_news_api/presentation/view/top/wm/top_highlights_widget_model.dart';
@@ -64,5 +65,7 @@ class _TopHighlightsScreenState extends WidgetState<TopHighlightsWidgetModel> {
         },
       );
 
-  Widget _errorChild() => Text(Strings.topHighlights);
+  Widget _errorChild() => ErrorItem(
+        onRetryClicked: () => wm.loadNews(),
+      );
 }

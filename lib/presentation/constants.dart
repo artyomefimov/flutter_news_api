@@ -5,6 +5,8 @@ abstract class Strings {
   static const chooseCategory = "Choose category";
   static const chooseCountry = "Choose country";
   static const checkInSource = "Check in source";
+  static const errorMessage = "Some error occurred while loading. Please retry";
+  static const retryButtonMessage = "Retry";
 }
 
 abstract class Paths {

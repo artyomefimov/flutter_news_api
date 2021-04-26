@@ -3,31 +3,36 @@ import 'package:flutter_news_api/domain/model/filter/top/top_filter.dart';
 import 'package:flutter_news_api/presentation/view/top/change/resolve_initial_filter_change.dart';
 import 'package:flutter_news_api/presentation/view/top/change/set_category_change.dart';
 import 'package:flutter_news_api/presentation/view/top/change/set_country_change.dart';
-import 'package:flutter_simple_dependency_injection/injector.dart';
 import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart' as r;
 
 class TopFilterWidgetModel extends WidgetModel {
   TopFilterWidgetModel(
+    TopFilterInteractor topFilterInteractor,
     WidgetModelDependencies baseDependencies,
     Model model,
   ) : super(baseDependencies, model: model) {
-    Injector().get<TopFilterInteractor>().getTopFilterBroadcast().listen((event) {
-      filter.accept(event);
-    });
+    _filterInteractor = topFilterInteractor;
+    _subscribeOnFilterUpdates();
   }
 
-  final filter = r.StreamedState<TopFilter>();
+  late final TopFilterInteractor _filterInteractor;
+  final topFilterState = r.StreamedState<TopFilter>();
 
-  void getInitialFilter() {
-    model.perform(ResolveInitialFilterChange());
-  }
+  void getInitialFilter() => model.perform(
+        ResolveInitialFilterChange(),
+      );
 
-  void setCountryName(String countryName) {
-    model.perform(SetCountryChange(countryName: countryName));
-  }
+  void setCountryName(String countryName) => model.perform(
+        SetCountryChange(countryName: countryName),
+      );
 
-  void setCategoryValue(String categoryValue) {
-    model.perform(SetCategoryChange(categoryValue: categoryValue));
-  }
+  void setCategoryValue(String categoryValue) => model.perform(
+        SetCategoryChange(categoryValue: categoryValue),
+      );
+
+  void _subscribeOnFilterUpdates() =>
+      _filterInteractor.getTopFilterBroadcast().listen(
+            (filter) => topFilterState.accept(filter),
+          );
 }

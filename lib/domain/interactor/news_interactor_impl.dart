@@ -14,7 +14,7 @@ class NewsInteractorImpl implements NewsInteractor {
   @override
   Future<ResultWrapper<News>> getTopArticles(TopFilter filter) =>
       _repository.getTopArticles(
-        filter.country.name,
+        filter.country.code,
         filter.category.value,
       );
 }
