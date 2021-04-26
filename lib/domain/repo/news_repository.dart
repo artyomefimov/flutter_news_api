@@ -8,6 +8,7 @@ abstract class NewsRepository {
   );
 
   Future<ResultWrapper<News>> getAllArticles(
+    String quoteInTitle,
     String language,
     String sortBy,
     int pageSize,

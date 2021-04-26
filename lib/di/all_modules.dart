@@ -5,6 +5,8 @@ import 'package:flutter_news_api/data/api/token/token_holder.dart';
 import 'package:flutter_news_api/data/mapper/news_mapper.dart';
 import 'package:flutter_news_api/data/model/news_response.dart';
 import 'package:flutter_news_api/data/repo/news_repository_impl.dart';
+import 'package:flutter_news_api/domain/interactor/filter/everything/everything_filter_interactor.dart';
+import 'package:flutter_news_api/domain/interactor/filter/everything/everything_filter_interactor_impl.dart';
 import 'package:flutter_news_api/domain/interactor/filter/top/top_filter_interactor.dart';
 import 'package:flutter_news_api/domain/interactor/filter/top/top_filter_interactor_impl.dart';
 import 'package:flutter_news_api/domain/interactor/news_interactor.dart';
@@ -12,8 +14,14 @@ import 'package:flutter_news_api/domain/interactor/news_interactor_impl.dart';
 import 'package:flutter_news_api/domain/mapper/mapper.dart';
 import 'package:flutter_news_api/domain/model/news/news.dart';
 import 'package:flutter_news_api/domain/repo/news_repository.dart';
+import 'package:flutter_news_api/presentation/view/everything/performer/loading_performer.dart';
+import 'package:flutter_news_api/presentation/view/everything/performer/resolve_all_initial_filter_performer.dart';
+import 'package:flutter_news_api/presentation/view/everything/performer/set_language_performer.dart';
+import 'package:flutter_news_api/presentation/view/everything/performer/set_sort_by_performer.dart';
+import 'package:flutter_news_api/presentation/view/everything/wm/all_news_widget_model.dart';
+import 'package:flutter_news_api/presentation/view/everything/wm/everything_filter_widget_model.dart';
 import 'package:flutter_news_api/presentation/view/top/performer/loading_performer.dart';
-import 'package:flutter_news_api/presentation/view/top/performer/resolve_initial_filter_performer.dart';
+import 'package:flutter_news_api/presentation/view/top/performer/resolve_top_initial_filter_performer.dart';
 import 'package:flutter_news_api/presentation/view/top/performer/set_category_performer.dart';
 import 'package:flutter_news_api/presentation/view/top/performer/set_country_performer.dart';
 import 'package:flutter_news_api/presentation/view/top/wm/top_filter_widget_model.dart';
@@ -86,6 +94,10 @@ class DiModule {
       (injector) => TopFilterInteractorImpl(),
       isSingleton: true,
     );
+    _injector.map<EverythingFilterInteractor>(
+      (injector) => EverythingFilterInteractorImpl(),
+      isSingleton: true,
+    );
   }
 
   void _presentationModule() {
@@ -94,7 +106,7 @@ class DiModule {
         _injector.get<TopFilterInteractor>(),
         WidgetModelDependencies(),
         Model([
-          ResolveInitialFilterPerformer(
+          ResolveTopInitialFilterPerformer(
             interactor: _injector.get<TopFilterInteractor>(),
           ),
           SetCountryPerformer(
@@ -111,9 +123,37 @@ class DiModule {
         _injector.get<TopFilterInteractor>(),
         WidgetModelDependencies(),
         Model([
-          LoadingPerformer(
+          TopNewsLoadingPerformer(
             interactor: _injector.get<NewsInteractor>(),
           ),
+        ]),
+      ),
+    );
+    _injector.map<AllNewsWidgetModel>(
+      (injector) => AllNewsWidgetModel(
+        _injector.get<EverythingFilterInteractor>(),
+        WidgetModelDependencies(),
+        Model([
+          AllNewsLoadingPerformer(
+            interactor: _injector.get<NewsInteractor>(),
+          ),
+        ]),
+      ),
+    );
+    _injector.map<EverythingFilterWidgetModel>(
+          (injector) => EverythingFilterWidgetModel(
+        _injector.get<EverythingFilterInteractor>(),
+        WidgetModelDependencies(),
+        Model([
+          ResolveAllInitialFilterPerformer(
+            interactor: _injector.get<EverythingFilterInteractor>(),
+          ),
+          SetLanguagePerformer(
+            interactor: _injector.get<EverythingFilterInteractor>(),
+          ),
+          SetSortByPerformer(
+            interactor: _injector.get<EverythingFilterInteractor>(),
+          )
         ]),
       ),
     );

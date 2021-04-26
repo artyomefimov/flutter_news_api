@@ -38,6 +38,7 @@ class NewsRepositoryImpl implements NewsRepository {
 
   @override
   Future<ResultWrapper<News>> getAllArticles(
+    String quoteInTitle,
     String language,
     String sortBy,
     int pageSize,
@@ -45,6 +46,7 @@ class NewsRepositoryImpl implements NewsRepository {
   ) async {
     try {
       final response = await _api.getAllArticles(
+        quoteInTitle,
         language,
         sortBy,
         pageSize,

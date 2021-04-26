@@ -4,8 +4,8 @@ import 'package:flutter_news_api/domain/model/result_wrapper.dart';
 import 'package:flutter_news_api/presentation/view/top/change/loading_change.dart';
 import 'package:mwwm/mwwm.dart';
 
-class LoadingPerformer extends FuturePerformer<ResultWrapper<News>, LoadingChange> {
-  LoadingPerformer({required this.interactor});
+class TopNewsLoadingPerformer extends FuturePerformer<ResultWrapper<News>, LoadingChange> {
+  TopNewsLoadingPerformer({required this.interactor});
 
   final NewsInteractor interactor;
 

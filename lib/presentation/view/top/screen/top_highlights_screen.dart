@@ -7,6 +7,7 @@ import 'package:flutter_news_api/presentation/view/top/route/top_highlights_rout
 import 'package:flutter_news_api/presentation/view/top/wm/top_highlights_widget_model.dart';
 import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart' as r;
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:scroll_shadow_container/scroll_shadow_container.dart';
 
 class TopHighlightsScreen extends CoreMwwmWidget {

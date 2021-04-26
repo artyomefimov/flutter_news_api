@@ -19,8 +19,9 @@ abstract class NewsApi {
 
   @GET("/everything")
   Future<NewsResponse> getAllArticles(
-    @Query("language") String? language,
-    @Query("sortBy") String? sortBy,
+    @Query("qInTitle") String quoteInTitle,
+    @Query("language") String language,
+    @Query("sortBy") String sortBy,
     @Query("pageSize") int pageSize,
     @Query("page") int page,
   );

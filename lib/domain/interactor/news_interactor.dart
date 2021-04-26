@@ -8,6 +8,7 @@ abstract class NewsInteractor {
 
   Future<ResultWrapper<News>> getAllArticles(
     EverythingFilter filter,
+    String quoteInTitle,
     int pageSize,
     int pageNum,
   );

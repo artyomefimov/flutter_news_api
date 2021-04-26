@@ -22,9 +22,12 @@ class NewsInteractorImpl implements NewsInteractor {
   @override
   Future<ResultWrapper<News>> getAllArticles(
     EverythingFilter filter,
+    String quoteInTitle,
     int pageSize,
     int pageNum,
-  ) => _repository.getAllArticles(
+  ) =>
+      _repository.getAllArticles(
+        quoteInTitle,
         filter.language.code,
         filter.sortBy.value,
         pageSize,

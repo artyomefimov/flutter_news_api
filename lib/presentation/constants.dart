@@ -4,6 +4,8 @@ abstract class Strings {
   static const everything = "Everything";
   static const chooseCategory = "Choose category";
   static const chooseCountry = "Choose country";
+  static const chooseLanguage = "Choose language";
+  static const chooseSortBy = "Sort by";
   static const checkInSource = "Check in source";
   static const errorMessage = "Some error occurred while loading. Please retry";
   static const retryButtonMessage = "Retry";

@@ -1,7 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_api/presentation/constants.dart';
-import 'file:///C:/FlutterApps/flutter_news_api/flutter_news_api/lib/presentation/view/everything/screen/AllNewsScreen.dart';
+import 'package:flutter_news_api/presentation/view/everything/route/all_news_route.dart';
 import 'package:flutter_news_api/presentation/view/top/route/top_highlights_route.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,7 +16,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     _items[0] = topHighlightsScreen(context);
-    _items[1] = AllNewsScreen();
+    _items[1] = allNewsScreen(context);
     super.initState();
   }
 

@@ -35,15 +35,16 @@ class _NewsApi implements NewsApi {
   }
 
   @override
-  Future<NewsResponse> getAllArticles(language, sortBy, pageSize, page) async {
+  Future<NewsResponse> getAllArticles(
+      quoteInTitle, language, sortBy, pageSize, page) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
+      r'qInTitle': quoteInTitle,
       r'language': language,
       r'sortBy': sortBy,
       r'pageSize': pageSize,
       r'page': page
     };
-    queryParameters.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<NewsResponse>(
