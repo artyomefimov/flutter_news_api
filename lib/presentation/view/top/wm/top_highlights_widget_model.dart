@@ -23,7 +23,7 @@ class TopHighlightsWidgetModel extends WidgetModel {
     await loadNewsState.loading();
     final resultWrapper = await model.perform(LoadingChange(filter: _currentFilter));
     resultWrapper.collect(
-      onSuccess: (result) => loadNewsState.content(result as News),
+      onSuccess: (result) => loadNewsState.content(result),
       onError: (errorMessage) => loadNewsState.error(errorMessage),
     );
   }

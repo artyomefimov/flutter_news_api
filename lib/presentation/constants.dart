@@ -1,18 +1,22 @@
 abstract class Strings {
-  static const newsApp = "News App";
-  static const topHighlights = "Top highlights";
-  static const everything = "Everything";
-  static const chooseCategory = "Choose category";
-  static const chooseCountry = "Choose country";
-  static const chooseLanguage = "Choose language";
-  static const chooseSortBy = "Sort by";
-  static const checkInSource = "Check in source";
-  static const errorMessage = "Some error occurred while loading. Please retry";
-  static const retryButtonMessage = "Retry";
+  static const newsApp = 'News App';
+  static const topHighlights = 'Top highlights';
+  static const everything = 'Everything';
+  static const chooseCategory = 'Choose category';
+  static const chooseCountry = 'Choose country';
+  static const chooseLanguage = 'Choose language';
+  static const chooseSortBy = 'Sort by';
+  static const checkInSource = 'Check in source';
+  static const errorMessage = 'Some error occurred while loading. Please retry';
+  static const retryButtonMessage = 'Retry';
+  static const countryPrefix = 'Country';
+  static const categoryPrefix = 'Category';
+  static const languagePrefix = 'Language';
+  static const sortByPrefix = 'Sort by';
 }
 
 abstract class Paths {
-  static const imageErrorPlaceholder = "assets/image_loading_error.png";
+  static const imageErrorPlaceholder = 'assets/image_loading_error.png';
 }
 
 abstract class Dimensions {

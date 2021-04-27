@@ -46,13 +46,19 @@ class _AllNewsFilterItemsState
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FilterItem(
-                    text: data.language.name,
+                    text: _createFilterItemText(
+                      Strings.languagePrefix,
+                      data.language.name,
+                    ),
                     dialogTitle: Strings.chooseLanguage,
                     dialogContent: allLanguageNames(),
                     onClicked: onLanguageClicked,
                   ),
                   FilterItem(
-                    text: data.sortBy.value,
+                    text: _createFilterItemText(
+                      Strings.sortByPrefix,
+                      data.sortBy.value,
+                    ),
                     dialogTitle: Strings.chooseSortBy,
                     dialogContent: allCriteriaValues(),
                     onClicked: onSortByClicked,
@@ -63,4 +69,7 @@ class _AllNewsFilterItemsState
           },
         ),
       );
+
+  String _createFilterItemText(String prefix, String suffix) =>
+      '$prefix: $suffix';
 }

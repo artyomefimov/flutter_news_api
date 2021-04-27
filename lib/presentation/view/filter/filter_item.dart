@@ -32,7 +32,7 @@ class FilterItem extends StatelessWidget {
               ),
         ).then((value) => onClicked(value));
       },
-      child: _item("Country: $text"),
+      child: _item(text),
     );
   }
 

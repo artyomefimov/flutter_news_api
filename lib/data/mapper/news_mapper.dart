@@ -19,16 +19,16 @@ class NewsMapper implements Mapper<NewsResponse, News> {
         final item = dtoArticles[index];
         final publishDate = item.publishedAt != null
             ? _dateFormat.format(DateTime.parse(item.publishedAt!))
-            : "";
+            : '';
         return Article(
-          sourceName: item.source?.name ?? "",
-          author: item.author ?? "",
-          title: item.title ?? "",
-          description: item.description ?? "",
-          url: item.url ?? "",
-          urlToImage: item.urlToImage ?? "",
+          sourceName: item.source?.name ?? '',
+          author: item.author ?? '',
+          title: item.title ?? '',
+          description: item.description ?? '',
+          url: item.url ?? '',
+          urlToImage: item.urlToImage ?? '',
           publishDate: publishDate,
-          content: item.content ?? "",
+          content: item.content ?? '',
         );
       });
 }

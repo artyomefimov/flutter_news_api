@@ -5,7 +5,7 @@ class ResultWrapper<T> {
 
   factory ResultWrapper.error(String errorMessage) = Error;
 
-  void collect<T>({
+  void collect({
     required void Function(T) onSuccess,
     required void Function(String) onError,
   }) {

@@ -27,13 +27,14 @@ class ErrorItem extends StatelessWidget {
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo),
           ),
-          child: Text(Strings.retryButtonMessage,
+          onPressed: onRetryClicked,
+          child: Text(
+            Strings.retryButtonMessage,
             style: TextStyle(
               fontSize: Dimensions.articleMainTextSize,
               color: Colors.white,
             ),
           ),
-            onPressed: onRetryClicked,
         ),
       ],
     );

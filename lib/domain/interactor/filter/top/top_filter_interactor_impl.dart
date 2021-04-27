@@ -8,8 +8,8 @@ import 'package:flutter_news_api/domain/model/filter/top/top_filter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TopFilterInteractorImpl implements TopFilterInteractor {
-  static const _countryNameKey = "country_name";
-  static const _categoryValueKey = "category_value";
+  static const _countryNameKey = 'country_name';
+  static const _categoryValueKey = 'category_value';
   SharedPreferences? _sharedPreferences;
   final _topFilterStream = StreamController<TopFilter>.broadcast();
   final _countries = allCountries();
@@ -38,7 +38,7 @@ class TopFilterInteractorImpl implements TopFilterInteractor {
   @override
   Future<void> changeCountryName(String countryName) async {
     final prefs = await _getPreferences();
-    prefs.setString(_countryNameKey, countryName);
+    await prefs.setString(_countryNameKey, countryName);
     _currentFilter = TopFilter(
       country: _countries.find((e) => e.name == countryName) ?? Country.USA,
       category: _currentFilter!.category,
@@ -49,7 +49,7 @@ class TopFilterInteractorImpl implements TopFilterInteractor {
   @override
   Future<void> changeCategoryValue(String categoryValue) async {
     final prefs = await _getPreferences();
-    prefs.setString(_categoryValueKey, categoryValue);
+    await prefs.setString(_categoryValueKey, categoryValue);
     _currentFilter = TopFilter(
       country: _currentFilter!.country,
       category:
@@ -74,9 +74,7 @@ class TopFilterInteractorImpl implements TopFilterInteractor {
   }
 
   Future<SharedPreferences> _getPreferences() async {
-    if (_sharedPreferences == null) {
-      _sharedPreferences = await SharedPreferences.getInstance();
-    }
+    _sharedPreferences ??= await SharedPreferences.getInstance();
     return _sharedPreferences!;
   }
 }

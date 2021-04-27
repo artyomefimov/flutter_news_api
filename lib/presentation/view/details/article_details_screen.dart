@@ -86,6 +86,11 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
       );
 
   Widget _checkInSource() => InkWell(
+    onTap: () async {
+      if (await canLaunch(widget.article.url)) {
+        await launch(widget.article.url);
+      }
+    },
     child: Text(
       Strings.checkInSource,
       style: TextStyle(
@@ -93,11 +98,6 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
         color: Colors.lightBlue,
       ),
     ),
-    onTap: () async {
-      if (await canLaunch(widget.article.url)) {
-        await launch(widget.article.url);
-      }
-    },
   );
 
   Widget _articleImage() => networkImage(widget.article.urlToImage);
