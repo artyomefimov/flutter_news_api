@@ -27,14 +27,17 @@ class _TopHighlightsScreenState extends WidgetState<TopHighlightsWidgetModel> {
         children: [
           topFilterItems(context),
           Expanded(
-            child: ScrollShadowContainer(
-              elevation: MaterialElevation.the4dp,
-              child: r.EntityStateBuilder<News>(
-                streamedState: wm.loadNewsState,
-                child: (context, data) => _contentChild(data as News),
-                loadingChild: loadingIndicator(),
-                errorChild: ErrorItem(
-                  onRetryClicked: () => wm.loadNews(),
+            child: RefreshIndicator(
+              onRefresh: () => Future.sync(() => wm.loadNews()),
+              child: ScrollShadowContainer(
+                elevation: MaterialElevation.the4dp,
+                child: r.EntityStateBuilder<News>(
+                  streamedState: wm.loadNewsState,
+                  child: (context, data) => _contentChild(data as News),
+                  loadingChild: loadingIndicator(),
+                  errorChild: ErrorItem(
+                    onRetryClicked: () => wm.loadNews(),
+                  ),
                 ),
               ),
             ),

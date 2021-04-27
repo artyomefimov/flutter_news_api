@@ -50,21 +50,26 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(
-            widget.article.sourceName,
-            style: TextStyle(
-              fontSize: Dimensions.articleMainTextSize,
-              color: Colors.grey,
+          Expanded(
+            child: Text(
+              widget.article.sourceName,
+              style: TextStyle(
+                fontSize: Dimensions.articleMainTextSize,
+                color: Colors.grey,
+              ),
             ),
           ),
           SizedBox(
             width: Dimensions.marginNormal,
           ),
-          Text(
-            widget.article.author,
-            style: TextStyle(
-              fontSize: Dimensions.articleMainTextSize,
-              color: Colors.grey,
+          Expanded(
+            child: Text(
+              widget.article.author,
+              style: TextStyle(
+                fontSize: Dimensions.articleMainTextSize,
+                color: Colors.grey,
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
