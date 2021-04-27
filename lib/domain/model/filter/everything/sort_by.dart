@@ -3,9 +3,9 @@ class SortBy {
 
   const SortBy._(this._value);
 
-  static const RELEVANCY = const SortBy._("Relevancy");
-  static const POPULARITY = const SortBy._("Popularity");
-  static const PUBLISHED_AT = const SortBy._("PublishedAt");
+  static const RELEVANCY = SortBy._('Relevancy');
+  static const POPULARITY = SortBy._('Popularity');
+  static const PUBLISHED_AT = SortBy._('PublishedAt');
 
   String get value => _value;
 }

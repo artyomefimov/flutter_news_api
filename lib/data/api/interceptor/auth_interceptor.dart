@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_news_api/data/api/token/token_holder.dart';
 
 class AuthInterceptor extends Interceptor {
-  static const String _authTokenName = "Authorization";
+  static const String _authTokenName = 'Authorization';
   late final TokenHolder _tokenHolder;
 
   AuthInterceptor(TokenHolder tokenHolder) {

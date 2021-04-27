@@ -31,7 +31,7 @@ class NewsRepositoryImpl implements NewsRepository {
       );
       return ResultWrapper.success(_articlesMapper.map(response));
     } catch (error, stacktrace) {
-      log("Exception occurred: $error stackTrace: $stacktrace");
+      log('Exception occurred: $error stackTrace: $stacktrace');
       return ResultWrapper.error(error.toString());
     }
   }
@@ -54,7 +54,7 @@ class NewsRepositoryImpl implements NewsRepository {
       );
       return ResultWrapper.success(_articlesMapper.map(response));
     } catch (error, stacktrace) {
-      log("Exception occurred: $error stackTrace: $stacktrace");
+      log('Exception occurred: $error stackTrace: $stacktrace');
       return ResultWrapper.error(error.toString());
     }
   }

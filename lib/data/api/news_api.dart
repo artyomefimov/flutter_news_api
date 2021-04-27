@@ -7,22 +7,22 @@ import 'package:retrofit/http.dart';
 
 part 'news_api.g.dart';
 
-@RestApi(baseUrl: "https://newsapi.org/v2")
+@RestApi(baseUrl: 'https://newsapi.org/v2')
 abstract class NewsApi {
   factory NewsApi(Dio dio, {String baseUrl}) = _NewsApi;
 
-  @GET("/top-headlines")
+  @GET('/top-headlines')
   Future<NewsResponse> getTopArticles(
-    @Query("country") String? country,
-    @Query("category") String? category,
+    @Query('country') String? country,
+    @Query('category') String? category,
   );
 
-  @GET("/everything")
+  @GET('/everything')
   Future<NewsResponse> getAllArticles(
-    @Query("qInTitle") String quoteInTitle,
-    @Query("language") String language,
-    @Query("sortBy") String sortBy,
-    @Query("pageSize") int pageSize,
-    @Query("page") int page,
+    @Query('qInTitle') String quoteInTitle,
+    @Query('language') String language,
+    @Query('sortBy') String sortBy,
+    @Query('pageSize') int pageSize,
+    @Query('page') int page,
   );
 }

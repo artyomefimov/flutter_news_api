@@ -43,14 +43,14 @@ class AllNewsWidgetModel extends WidgetModel {
     final resultWrapper = await model.perform(
       LoadingChange(
         filter: _currentFilter!,
-        quoteInTitle: "Trump",
+        quoteInTitle: 'Trump',
         pageSize: _pageSize,
         pageNum: _pageNum,
       ),
     );
     resultWrapper.collect(
       onSuccess: (result) {
-        final items = (result as News).articles;
+        final items = result.articles;
         final isLastPage = items.length < _pageSize;
         if (isLastPage) {
           pagingController.appendLastPage(items);

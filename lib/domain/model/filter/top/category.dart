@@ -3,13 +3,13 @@ class Category {
 
   const Category._(this._value);
 
-  static const BUSINESS = const Category._("Business");
-  static const ENTERTAINMENT = const Category._("Entertainment");
-  static const GENERAL = const Category._("General");
-  static const HEALTH = const Category._("Health");
-  static const SCIENCE = const Category._("Science");
-  static const SPORTS = const Category._("Sports");
-  static const TECHNOLOGY = const Category._("Technology");
+  static const BUSINESS = Category._('Business');
+  static const ENTERTAINMENT = Category._('Entertainment');
+  static const GENERAL = Category._('General');
+  static const HEALTH = Category._('Health');
+  static const SCIENCE = Category._('Science');
+  static const SPORTS = Category._('Sports');
+  static const TECHNOLOGY = Category._('Technology');
 
   String get value => _value;
 }

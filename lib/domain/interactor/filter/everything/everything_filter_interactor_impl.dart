@@ -8,8 +8,8 @@ import 'package:flutter_news_api/domain/model/filter/everything/sort_by.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EverythingFilterInteractorImpl implements EverythingFilterInteractor {
-  static const _languageKey = "language";
-  static const _sortByKey = "sort_by";
+  static const _languageKey = 'language';
+  static const _sortByKey = 'sort_by';
   final _filterStream = StreamController<EverythingFilter>.broadcast();
   final _languages = allLanguages();
   final _criteria = allCriteria();
@@ -37,7 +37,7 @@ class EverythingFilterInteractorImpl implements EverythingFilterInteractor {
   @override
   Future<void> changeLanguage(String languageName) async {
     final prefs = await _getPreferences();
-    prefs.setString(_languageKey, languageName);
+    await prefs.setString(_languageKey, languageName);
     _currentFilter = EverythingFilter(
       language:
           _languages.find((e) => e.name == languageName) ?? Language.ENGLISH,
@@ -49,7 +49,7 @@ class EverythingFilterInteractorImpl implements EverythingFilterInteractor {
   @override
   Future<void> changeSortBy(String value) async {
     final prefs = await _getPreferences();
-    prefs.setString(_sortByKey, value);
+    await prefs.setString(_sortByKey, value);
     _currentFilter = EverythingFilter(
       language: _currentFilter!.language,
       sortBy: _criteria.find((e) => e.value == value) ?? SortBy.RELEVANCY,
@@ -73,9 +73,7 @@ class EverythingFilterInteractorImpl implements EverythingFilterInteractor {
   }
 
   Future<SharedPreferences> _getPreferences() async {
-    if (_sharedPreferences == null) {
-      _sharedPreferences = await SharedPreferences.getInstance();
-    }
+    _sharedPreferences ??= await SharedPreferences.getInstance();
     return _sharedPreferences!;
   }
 }

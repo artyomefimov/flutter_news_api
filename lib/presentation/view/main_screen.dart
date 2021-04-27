@@ -30,9 +30,9 @@ class _MainScreenState extends State<MainScreen> {
       body: PageTransitionSwitcher(
         transitionBuilder: (child, primaryAnim, secondaryAnim) =>
             FadeThroughTransition(
-          child: child,
           animation: primaryAnim,
           secondaryAnimation: secondaryAnim,
+          child: child,
         ),
         child: _items.entries
             .firstWhere((entry) => entry.key == _currentIndex)

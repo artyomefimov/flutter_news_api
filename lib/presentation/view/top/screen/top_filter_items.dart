@@ -45,13 +45,19 @@ class _TopFilterItemsState extends WidgetState<TopFilterWidgetModel> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FilterItem(
-                    text: data.country.name,
+                    text: _createFilterItemText(
+                      Strings.countryPrefix,
+                      data.country.name,
+                    ),
                     dialogTitle: Strings.chooseCountry,
                     dialogContent: allCountryNames(),
                     onClicked: onCountryClicked,
                   ),
                   FilterItem(
-                    text: data.category.value,
+                    text: _createFilterItemText(
+                      Strings.categoryPrefix,
+                      data.category.value,
+                    ),
                     dialogTitle: Strings.chooseCategory,
                     dialogContent: allCategoryValues(),
                     onClicked: onCategoryClicked,
@@ -62,4 +68,7 @@ class _TopFilterItemsState extends WidgetState<TopFilterWidgetModel> {
           },
         ),
       );
+
+  String _createFilterItemText(String prefix, String suffix) =>
+      '$prefix: $suffix';
 }

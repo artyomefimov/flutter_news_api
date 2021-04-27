@@ -4,12 +4,12 @@ class Language {
 
   const Language._(this._code, this._name);
 
-  static const GERMAN = const Language._("de", "German");
-  static const FRENCH = const Language._("fr", "French");
-  static const ENGLISH = const Language._("en", "English");
-  static const ITALIAN = const Language._("it", "Italian");
-  static const RUSSIAN = const Language._("ru", "Russian");
-  static const SPANISH = const Language._("es", "Spanish");
+  static const GERMAN = Language._('de', 'German');
+  static const FRENCH = Language._('fr', 'French');
+  static const ENGLISH = Language._('en', 'English');
+  static const ITALIAN = Language._('it', 'Italian');
+  static const RUSSIAN = Language._('ru', 'Russian');
+  static const SPANISH = Language._('es', 'Spanish');
 
   String get code => _code;
 
