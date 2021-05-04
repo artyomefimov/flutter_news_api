@@ -5,11 +5,11 @@ part 'source.g.dart';
 
 @JsonSerializable()
 class Source {
-  late final String id;
+  final String? id;
   late final String name;
 
   Source({
-    required this.id,
+    this.id,
     required this.name,
   });
 

@@ -8,7 +8,7 @@ part of 'source.dart';
 
 Source _$SourceFromJson(Map<String, dynamic> json) {
   return Source(
-    id: json['id'] as String,
+    id: json['id'] as String?,
     name: json['name'] as String,
   );
 }
