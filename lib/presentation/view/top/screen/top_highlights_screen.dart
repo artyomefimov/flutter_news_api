@@ -9,9 +9,6 @@ import 'package:flutter_news_api/presentation/view/top/wm/top_highlights_widget_
 import 'package:mwwm/mwwm.dart';
 import 'package:relation/relation.dart' as r;
 
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:scroll_shadow_container/scroll_shadow_container.dart';
-
 class TopHighlightsScreen extends CoreMwwmWidget {
   TopHighlightsScreen({
     required WidgetModelBuilder widgetModelBuilder,
@@ -29,15 +26,12 @@ class _TopHighlightsScreenState extends WidgetState<TopHighlightsWidgetModel> {
           Expanded(
             child: RefreshIndicator(
               onRefresh: () => Future.sync(() => wm.loadNews()),
-              child: ScrollShadowContainer(
-                elevation: MaterialElevation.the4dp,
-                child: r.EntityStateBuilder<News>(
-                  streamedState: wm.loadNewsState,
-                  child: (context, data) => _contentChild(data as News),
-                  loadingChild: loadingIndicator(),
-                  errorChild: ErrorItem(
-                    onRetryClicked: () => wm.loadNews(),
-                  ),
+              child: r.EntityStateBuilder<News>(
+                streamedState: wm.loadNewsState,
+                child: (context, data) => _contentChild(data as News),
+                loadingChild: loadingIndicator(),
+                errorChild: ErrorItem(
+                  onRetryClicked: () => wm.loadNews(),
                 ),
               ),
             ),

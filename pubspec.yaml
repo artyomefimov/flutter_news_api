@@ -37,7 +37,6 @@ dependencies:
   mwwm: ^1.0.2
   relation: ^1.0.0
   dart_extensions: ^2.0.1
-  scroll_shadow_container: ^1.0.1
   url_launcher: ^6.0.3
   animations: ^2.0.0
   shared_preferences: ^2.0.5
