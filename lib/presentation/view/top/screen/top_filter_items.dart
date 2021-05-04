@@ -24,7 +24,6 @@ class _TopFilterItemsState extends WidgetState<TopFilterWidgetModel> {
   @override
   void initState() {
     super.initState();
-    wm.getInitialFilter();
     onCountryClicked = (countryName) => wm.setCountryName(countryName);
     onCategoryClicked = (categoryValue) => wm.setCategoryValue(categoryValue);
   }

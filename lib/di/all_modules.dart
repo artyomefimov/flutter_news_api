@@ -15,13 +15,12 @@ import 'package:flutter_news_api/domain/mapper/mapper.dart';
 import 'package:flutter_news_api/domain/model/news/news.dart';
 import 'package:flutter_news_api/domain/repo/news_repository.dart';
 import 'package:flutter_news_api/presentation/view/everything/performer/loading_performer.dart';
-import 'package:flutter_news_api/presentation/view/everything/performer/resolve_all_initial_filter_performer.dart';
 import 'package:flutter_news_api/presentation/view/everything/performer/set_language_performer.dart';
+import 'package:flutter_news_api/presentation/view/everything/performer/set_search_query_performer.dart';
 import 'package:flutter_news_api/presentation/view/everything/performer/set_sort_by_performer.dart';
 import 'package:flutter_news_api/presentation/view/everything/wm/all_news_widget_model.dart';
 import 'package:flutter_news_api/presentation/view/everything/wm/everything_filter_widget_model.dart';
 import 'package:flutter_news_api/presentation/view/top/performer/loading_performer.dart';
-import 'package:flutter_news_api/presentation/view/top/performer/resolve_top_initial_filter_performer.dart';
 import 'package:flutter_news_api/presentation/view/top/performer/set_category_performer.dart';
 import 'package:flutter_news_api/presentation/view/top/performer/set_country_performer.dart';
 import 'package:flutter_news_api/presentation/view/top/wm/top_filter_widget_model.dart';
@@ -106,9 +105,6 @@ class DiModule {
         _injector.get<TopFilterInteractor>(),
         WidgetModelDependencies(),
         Model([
-          ResolveTopInitialFilterPerformer(
-            interactor: _injector.get<TopFilterInteractor>(),
-          ),
           SetCountryPerformer(
             interactor: _injector.get<TopFilterInteractor>(),
           ),
@@ -141,11 +137,11 @@ class DiModule {
       ),
     );
     _injector.map<EverythingFilterWidgetModel>(
-          (injector) => EverythingFilterWidgetModel(
+      (injector) => EverythingFilterWidgetModel(
         _injector.get<EverythingFilterInteractor>(),
         WidgetModelDependencies(),
         Model([
-          ResolveAllInitialFilterPerformer(
+          SetSearchQueryPerformer(
             interactor: _injector.get<EverythingFilterInteractor>(),
           ),
           SetLanguagePerformer(

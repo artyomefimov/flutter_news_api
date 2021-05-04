@@ -13,6 +13,8 @@ abstract class Strings {
   static const categoryPrefix = 'Category';
   static const languagePrefix = 'Language';
   static const sortByPrefix = 'Sort by';
+  static const searchLabel = 'Search';
+  static const searchHint = 'Type search query...';
 }
 
 abstract class Paths {
@@ -32,4 +34,5 @@ abstract class Dimensions {
   static const progressBarStrokeWidth = 4.0;
   static const filterItemRadius = 20.0;
   static const imageContainerSize = 200.0;
+  static const searchFieldStrokeWidth = 2.0;
 }

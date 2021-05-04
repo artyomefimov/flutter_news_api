@@ -10,13 +10,13 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  static final Map<int, Widget> _items = {};
+  final List<Widget> _tabWidgets = List.empty(growable: true);
   var _currentIndex = 0;
 
   @override
   void initState() {
-    _items[0] = topHighlightsScreen(context);
-    _items[1] = allNewsScreen(context);
+    _tabWidgets.add(_tabWidget(topHighlightsScreen(context)));
+    _tabWidgets.add(_tabWidget(allNewsScreen(context)));
     super.initState();
   }
 
@@ -27,16 +27,9 @@ class _MainScreenState extends State<MainScreen> {
         title: Text(Strings.newsApp),
         centerTitle: true,
       ),
-      body: PageTransitionSwitcher(
-        transitionBuilder: (child, primaryAnim, secondaryAnim) =>
-            FadeThroughTransition(
-          animation: primaryAnim,
-          secondaryAnimation: secondaryAnim,
-          child: child,
-        ),
-        child: _items.entries
-            .firstWhere((entry) => entry.key == _currentIndex)
-            .value,
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _tabWidgets,
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -70,4 +63,14 @@ class _MainScreenState extends State<MainScreen> {
       ),
     ];
   }
+
+  Widget _tabWidget(Widget childWidget) =>  PageTransitionSwitcher(
+    transitionBuilder: (child, primaryAnim, secondaryAnim) =>
+        FadeThroughTransition(
+          animation: primaryAnim,
+          secondaryAnimation: secondaryAnim,
+          child: child,
+        ),
+    child: childWidget
+  );
 }

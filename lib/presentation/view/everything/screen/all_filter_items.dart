@@ -19,15 +19,22 @@ class AllNewsFilterItems extends CoreMwwmWidget {
 
 class _AllNewsFilterItemsState
     extends WidgetState<EverythingFilterWidgetModel> {
+  final _searchController = TextEditingController();
   late final onLanguageClicked;
   late final onSortByClicked;
+  var _searchInProgress = false;
 
   @override
   void initState() {
     super.initState();
-    wm.getInitialFilter();
     onLanguageClicked = (language) => wm.setLanguage(language);
     onSortByClicked = (value) => wm.setSortBy(value);
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -42,34 +49,95 @@ class _AllNewsFilterItemsState
             if (data == null) {
               return Container();
             } else {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  FilterItem(
-                    text: _createFilterItemText(
-                      Strings.languagePrefix,
-                      data.language.name,
-                    ),
-                    dialogTitle: Strings.chooseLanguage,
-                    dialogContent: allLanguageNames(),
-                    onClicked: onLanguageClicked,
-                  ),
-                  FilterItem(
-                    text: _createFilterItemText(
-                      Strings.sortByPrefix,
-                      data.sortBy.value,
-                    ),
-                    dialogTitle: Strings.chooseSortBy,
-                    dialogContent: allCriteriaValues(),
-                    onClicked: onSortByClicked,
-                  ),
-                ],
-              );
+              return Column(children: [
+                _filterItemsRow(data),
+                Visibility(
+                  visible: _searchInProgress,
+                  child: _searchField(),
+                )
+              ]);
             }
           },
         ),
       );
 
+  Widget _filterItemsRow(EverythingFilter filter) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          FilterItem(
+            text: _createFilterItemText(
+              Strings.languagePrefix,
+              filter.language.name,
+            ),
+            dialogTitle: Strings.chooseLanguage,
+            dialogContent: allLanguageNames(),
+            onClicked: onLanguageClicked,
+          ),
+          FilterItem(
+            text: _createFilterItemText(
+              Strings.sortByPrefix,
+              filter.sortBy.value,
+            ),
+            dialogTitle: Strings.chooseSortBy,
+            dialogContent: allCriteriaValues(),
+            onClicked: onSortByClicked,
+          ),
+          IconButton(
+            icon: Icon(_searchInProgress ? Icons.search_off : Icons.search),
+            onPressed: _onSearchPressed,
+          )
+        ],
+      );
+
   String _createFilterItemText(String prefix, String suffix) =>
       '$prefix: $suffix';
+
+  void _onSearchPressed() {
+    setState(() {
+      _searchInProgress = !_searchInProgress;
+    });
+  }
+
+  Widget _searchField() => Container(
+        padding: EdgeInsets.all(Dimensions.marginNormal),
+        child: TextField(
+          controller: _searchController,
+          decoration: InputDecoration(
+            labelText: Strings.searchLabel,
+            hintText: Strings.searchHint,
+            prefixIcon: Icon(Icons.search),
+            suffixIcon: GestureDetector(
+              onTap: () {
+                _searchController.clear();
+              },
+              child: Icon(
+                Icons.clear,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(Dimensions.itemRadius),
+              ),
+              borderSide: BorderSide(
+                color: Colors.grey,
+                width: Dimensions.searchFieldStrokeWidth,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(Dimensions.itemRadius),
+              ),
+              borderSide: BorderSide(
+                color: Colors.indigoAccent,
+                width: Dimensions.searchFieldStrokeWidth,
+              ),
+            ),
+          ),
+          keyboardType: TextInputType.text,
+          onSubmitted: (query) {
+            wm.setSearchQuery(query);
+            _onSearchPressed();
+          },
+        ),
+      );
 }

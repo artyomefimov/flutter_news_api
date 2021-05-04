@@ -16,23 +16,8 @@ class TopFilterInteractorImpl implements TopFilterInteractor {
   final _categories = allCategories();
   TopFilter? _currentFilter;
 
-  @override
-  Future<void> resolveInitialFilter() async {
-    final countryName = await _getInitialValue(
-      key: _countryNameKey,
-      defaultValue: Country.USA.name,
-    );
-    final categoryValue = await _getInitialValue(
-      key: _categoryValueKey,
-      defaultValue: Category.GENERAL.value,
-    );
-
-    _currentFilter = TopFilter(
-      country: _countries.find((e) => e.name == countryName) ?? Country.USA,
-      category:
-          _categories.find((e) => e.value == categoryValue) ?? Category.GENERAL,
-    );
-    _topFilterStream.add(_currentFilter!);
+  TopFilterInteractorImpl() {
+    _resolveInitialFilter();
   }
 
   @override
@@ -71,6 +56,24 @@ class TopFilterInteractorImpl implements TopFilterInteractor {
       await prefs.setString(key, defaultValue);
     }
     return prefs.getString(key) ?? defaultValue;
+  }
+
+  Future<void> _resolveInitialFilter() async {
+    final countryName = await _getInitialValue(
+      key: _countryNameKey,
+      defaultValue: Country.USA.name,
+    );
+    final categoryValue = await _getInitialValue(
+      key: _categoryValueKey,
+      defaultValue: Category.GENERAL.value,
+    );
+
+    _currentFilter = TopFilter(
+      country: _countries.find((e) => e.name == countryName) ?? Country.USA,
+      category:
+      _categories.find((e) => e.value == categoryValue) ?? Category.GENERAL,
+    );
+    _topFilterStream.add(_currentFilter!);
   }
 
   Future<SharedPreferences> _getPreferences() async {
