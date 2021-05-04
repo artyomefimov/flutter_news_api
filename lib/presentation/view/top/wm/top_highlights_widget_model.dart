@@ -21,18 +21,19 @@ class TopHighlightsWidgetModel extends WidgetModel {
 
   void loadNews() async {
     await loadNewsState.loading();
-    final resultWrapper = await model.perform(LoadingChange(filter: _currentFilter));
+    final resultWrapper =
+        await model.perform(LoadingChange(filter: _currentFilter));
     resultWrapper.collect(
       onSuccess: (result) => loadNewsState.content(result),
       onError: (errorMessage) => loadNewsState.error(errorMessage),
     );
   }
 
-  void _subscribeOnFilterUpdates() =>
-      _filterInteractor.getTopFilterBroadcast().listen(
-            (filter) {
-              _currentFilter = filter;
-              loadNews();
-            },
-          );
+  void _subscribeOnFilterUpdates() => subscribe<TopFilter>(
+        _filterInteractor.getTopFilterBroadcast(),
+        (filter) {
+          _currentFilter = filter;
+          loadNews();
+        },
+      );
 }

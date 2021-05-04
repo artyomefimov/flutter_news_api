@@ -28,21 +28,23 @@ class _ArticleDetailsScreenState extends State<ArticleDetailsScreen> {
   Widget _body() =>
       Container(
         padding: EdgeInsets.all(Dimensions.marginNormal),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _authorAndSource(),
-            _marginDefault(),
-            _title(),
-            _marginDefault(),
-            _checkInSource(),
-            _marginDefault(),
-            _articleImage(),
-            _marginDefault(),
-            _content(),
-            _marginDefault(),
-            _publishDate(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _authorAndSource(),
+              _marginDefault(),
+              _title(),
+              _marginDefault(),
+              _checkInSource(),
+              _marginDefault(),
+              _articleImage(),
+              _marginDefault(),
+              _content(),
+              _marginDefault(),
+              _publishDate(),
+            ],
+          ),
         ),
       );
 

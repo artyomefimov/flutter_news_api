@@ -15,6 +15,7 @@ class AllNewsWidgetModel extends WidgetModel {
   ) : super(baseDependencies, model: model) {
     _filterInteractor = interactor;
     _subscribeOnFilterUpdates();
+    _subscribeOnSearchQueryUpdates();
     pagingController.addPageRequestListener((pageKey) {
       loadNews();
     });
@@ -23,6 +24,7 @@ class AllNewsWidgetModel extends WidgetModel {
   static const _pageSize = 20;
   static var _pageNum = 1;
   static var _pageKey = 0;
+  static var _searchQuery = '';
 
   late final EverythingFilterInteractor _filterInteractor;
   final PagingController<int, Article> pagingController =
@@ -38,12 +40,12 @@ class AllNewsWidgetModel extends WidgetModel {
   }
 
   void loadNews() async {
-    if (_currentFilter == null) return;
+    if (_currentFilter == null || _searchQuery.isEmpty) return;
 
     final resultWrapper = await model.perform(
       LoadingChange(
         filter: _currentFilter!,
-        quoteInTitle: 'Trump',
+        quoteInTitle: _searchQuery,
         pageSize: _pageSize,
         pageNum: _pageNum,
       ),
@@ -68,10 +70,11 @@ class AllNewsWidgetModel extends WidgetModel {
     _pageKey = 0;
     _pageNum = 1;
     pagingController.refresh();
+    pagingController.notifyPageRequestListeners(0);
   }
 
-  void _subscribeOnFilterUpdates() =>
-      _filterInteractor.getEverythingFilterBroadcast().listen(
+  void _subscribeOnFilterUpdates() => subscribe<EverythingFilter>(
+        _filterInteractor.getEverythingFilterBroadcast(),
         (filter) {
           if (_currentFilter == null) {
             _currentFilter = filter;
@@ -80,6 +83,14 @@ class AllNewsWidgetModel extends WidgetModel {
             _currentFilter = filter;
             refresh();
           }
+        },
+      );
+
+  void _subscribeOnSearchQueryUpdates() => subscribe<String>(
+        _filterInteractor.getSearchQueryBroadcast(),
+        (query) {
+          _searchQuery = query;
+          refresh();
         },
       );
 }
